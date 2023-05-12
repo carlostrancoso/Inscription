@@ -1,0 +1,405 @@
+<!DOCTYPE html>
+<html lang="">
+
+<head>
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>ANN</title>
+  <link type="text/css" rel="stylesheet" href="./main.css">
+  <script  type="importmap">{
+    "imports": {
+      "three": "https://threejs.org/build/three.module.js"
+    }
+  }</script><!-- Remove this when import maps will be widely supported -->
+  <script async src="https://unpkg.com/es-module-shims@1.3.6/dist/es-module-shims.js"></script>
+  <script type="module">
+    
+   //bibliotecas
+   import * as THREE from 'three';
+   import {OrbitControls} from 'https://threejs.org/examples/jsm/controls/OrbitControls.js';
+   import {OBJLoader} from 'https://threejs.org/examples/jsm/loaders/OBJLoader.js';
+   import {MTLLoader} from 'https://threejs.org/examples/jsm/loaders/MTLLoader.js';
+   import { GLTFLoader } from 'https://threejs.org/examples/jsm/loaders/GLTFLoader.js';
+
+  //loading screen
+
+  const manager = new THREE.LoadingManager();
+  const loadingContainer = document.querySelector('.loading-screen')
+  
+  manager.onLoad = function ( ) {
+
+  loadingContainer.style.display='none';
+  
+
+};
+
+manager.onError = function ( url ) {
+
+	console.log( 'There was an error loading ' + url );
+
+};
+
+  //janela e motor render
+  var canvas = document.querySelector('#c');
+  var renderer = new THREE.WebGLRenderer({canvas, alpha:true});
+  renderer.setClearColor( 0xEDEDED, 0 );
+    
+  //camera
+  var fov = 25;
+  var aspect = 2;  // the canvas default
+  var near = 1;
+  var far = 50;
+  var camera = new THREE.PerspectiveCamera(fov, aspect, near, far);
+  camera.position.set(0, 10, 20);
+
+
+    
+  //controlo orbita
+  var controls = new OrbitControls(camera, canvas);
+  controls.enableDamping = true;
+  controls.dampingFactor = 0.05;  
+  controls.target.set(0, 1, 0);
+  controls.enableZoom = true;
+  controls.enablePan = true;
+  controls.maxPolarAngle = 3*Math.PI/4;
+  controls.minPolarAngle = Math.PI/4;
+  controls.minDistance = 10;
+  controls.maxDistance = far;
+    
+  //cena e fundo 
+  //const bgcolor = new THREE.Color(0xEDEDED);
+  const bgcolor = new THREE.Color(0x000000);
+  const scene = new THREE.Scene();
+  scene.background = bgcolor;
+
+  //luz ambiente
+
+  const light = new THREE.AmbientLight( 0xffffff, 1 ); // soft white light
+  scene.add( light );
+
+  
+
+    
+  //luz vermelha
+  {
+    var color = 0xFF0000;
+    var intensity = 3;
+    var lightR = new THREE.DirectionalLight(color, intensity);
+    lightR.position.set(5, 10, 10);
+    scene.add(lightR);
+    scene.add(lightR.target);
+  }
+
+   
+    //luz azul
+  {
+    var color = 0x0000FF;
+    var intensity = 5; 
+    var lightB = new THREE.DirectionalLight(color, intensity);
+    lightB.position.set(2, -5, 2);
+    scene.add(lightB);
+    scene.add(lightB.target);
+  }
+
+   
+    //luz verde
+    
+  {
+    var color = 0x00FF00;
+    var intensity = 3;
+    var lightG = new THREE.DirectionalLight(color, intensity);
+    lightG.position.set(-10, 12, 2);
+    scene.add(lightG);
+    scene.add(lightG.target);
+  }
+  
+ 
+
+  //lupa
+
+	  var lupa;
+  {
+    var objLoader = new OBJLoader(manager);
+    var mat = new THREE.MeshPhysicalMaterial({});
+mat.reflectivity = 0
+mat.transmission = 1
+mat.roughness = 0.2
+mat.metalness = 0
+mat.clearcoat = 0.3
+mat.clearcoatRoughness = 0.25
+mat.color = new THREE.Color(0xffffff)
+mat.ior = 1.2
+mat.thickness = 5
+
+objLoader.load('LUPA.obj', function (obj) {
+        obj.traverse(function (child) {
+
+            if (child instanceof THREE.Mesh) {
+                child.material = mat;
+                mat.side = THREE.DoubleSide;
+            }
+
+        });
+        lupa = obj;
+        scene.add(lupa);
+      lupa.rotation.y = Math.PI;
+      
+    });
+    }
+
+    //bustos
+
+    const loader = new GLTFLoader();
+
+  var busto;
+
+						loader.load( './BUSTO.gltf', function ( gltf ) {
+              busto = gltf.scene;
+              busto.visible = true;
+              busto.rotation.y= Math.PI;
+							scene.add( busto );
+
+              //objectURLs.forEach( ( url ) => URL.revokeObjectURL( url ) )
+
+             // render();
+
+} );
+
+var busto2;
+
+						loader.load( './BUSTO_2.gltf', function ( gltf ) {
+              busto2 = gltf.scene;
+							scene.add( busto2 );
+              busto2.visible = false;
+
+              //objectURLs.forEach( ( url ) => URL.revokeObjectURL( url ) )
+
+             // render();
+
+} );
+
+var busto3;
+
+						loader.load( './BUSTO_3.gltf', function ( gltf ) {
+              busto3 = gltf.scene;
+							scene.add( busto3 );
+              busto3.visible = false;
+
+              //objectURLs.forEach( ( url ) => URL.revokeObjectURL( url ) )
+
+              //render();
+
+} );
+
+var busto4;
+
+						loader.load( './BUSTO_4.gltf', function ( gltf ) {
+              busto4 = gltf.scene;
+							scene.add( busto4 );
+              busto4.visible = false;
+
+              //objectURLs.forEach( ( url ) => URL.revokeObjectURL( url ) )
+
+             // render();
+
+} );
+
+var busto5;
+
+						loader.load( './BUSTO_5.gltf', function ( gltf ) {
+              busto5 = gltf.scene;
+							scene.add( busto5 );
+              busto5.visible = false;
+              busto5.rotation.y = Math.PI;
+
+              //objectURLs.forEach( ( url ) => URL.revokeObjectURL( url ) )
+
+              //render();
+
+} );
+
+
+  //Rotatividade dos modelos
+
+  var state = 0;
+
+  var rotatividade = function (event) {
+    state++;
+
+    if (state == 1) {
+
+    //gustavo
+    busto.visible = false;
+    busto2.visible = true;
+    busto3.visible = false;
+    busto4.visible = false;
+    busto5.visible = false;
+
+  } else if (state == 2) {
+    //gemeas
+    busto.visible = false;
+    busto2.visible = false;
+    busto3.visible = true;
+    busto4.visible = false;
+    busto5.visible = false;
+
+  } else if (state == 3) {
+    //matias
+    busto.visible = false;
+    busto2.visible = false;
+    busto3.visible = false;
+    busto4.visible = true;
+    busto5.visible = false;
+
+  } else if (state == 4) {
+    //madrinha
+    busto.visible = false;
+    busto2.visible = false;
+    busto3.visible = false;
+    busto4.visible = false;
+    busto5.visible = true;
+
+  } else if (state >= 5) {
+    state = 0;
+    //lucas
+    busto.visible = true;
+    busto2.visible = false;
+    busto3.visible = false;
+    busto4.visible = false; 
+    busto5.visible = false;
+  }
+};
+
+// formas de interacao
+
+document.querySelector('#c').addEventListener('dblclick', rotatividade, false);
+document.querySelector('#c').addEventListener("touchstart", tapHandler);
+
+var tapedTwice = false;
+
+function tapHandler(event) {
+    if(!tapedTwice) {
+        tapedTwice = true;
+        setTimeout( function() { tapedTwice = false; }, 300 );
+        return false;
+    }
+    event.preventDefault();
+    rotatividade();
+ }
+
+//redimensionamento da janela
+
+  function resizeRendererToDisplaySize(renderer) {
+    var canvas = renderer.domElement;
+    var width = canvas.clientWidth;
+    var height = canvas.clientHeight;
+    var needResize = canvas.width !== width || canvas.height !== height;
+    if (needResize) {
+      renderer.setSize(width, height, false);
+    }
+    return needResize;
+  }
+
+  const clock = new THREE.Clock()
+
+
+
+  //funcao de animacao
+ function animate() {
+
+  const elapsedTime = clock.getElapsedTime()%22
+
+  if (elapsedTime >= 10 && elapsedTime <= 11) {
+    
+  if(lupa) lupa.rotation.y -= Math.random()*0.05;
+
+} else if (elapsedTime >= 15 && elapsedTime <= 16) {
+
+  if(lupa) lupa.rotation.y += Math.random()*0.1;
+
+} else if (elapsedTime >= 17 && elapsedTime <= 18) {
+
+if(lupa) lupa.rotation.y -= Math.random()*0.1;
+
+} else if (elapsedTime >= 19 && elapsedTime <= 20) {
+
+if(lupa) lupa.rotation.y -= Math.random()*0.1;
+
+} else if (elapsedTime >= 21) {
+
+if(lupa) lupa.rotation.y += Math.random()*0.1;
+
+}
+
+
+   if(busto) busto.rotation.y -= 0.002;    
+   if(busto2) busto2.rotation.y -= 0.002;   
+   if(busto3) busto3.rotation.y += 0.002;   
+   if(busto4) busto4.rotation.y -= 0.002;  
+   if(busto5) busto5.rotation.y -= 0.002;
+
+    renderer.render(scene, camera);
+
+    if (resizeRendererToDisplaySize(renderer)) {
+      var canvas = renderer.domElement;
+      camera.aspect = canvas.clientWidth / canvas.clientHeight;
+      camera.updateProjectionMatrix();
+    }
+    controls.update();
+
+    
+    console.log(elapsedTime);
+
+    requestAnimationFrame(animate);
+    
+};
+
+animate();
+
+
+
+
+    </script>
+</head>
+
+<body>
+
+  <!-- Info inicial -->
+  <div class="info">
+    <div class="message"><h3>ANN</h3><br>Interact by tapping, dragging and zooming.<br><br>Double tap or double click to change.<br><br>Use the buttons 'Previous' and 'Next' to switch between experiences,<br>and the 'About' button to find out more information.<br><br></div>
+    <br />
+    <button class="ok" onclick="this.parentElement.style.display='none';">OK</button>
+</div>
+
+<div class="sobre" id="sobreMsg">
+	<div class="message"><h3>Persona</h3><a href="https://carlostrancoso.com/"><h2>Carlos Trancoso</h2></a>‘Persona’ is part of the experimental project <a href="https://carlostrancoso.com/rise-of-trivial/">‘Rise of trivial’</a>. The term ‘Persona’ is used in digital marketing to describe a fictional character who represents an ideal customer. It is also, in the conception of classical philosophy, an archetype, that is, an idea as an original model of something existing. These portraits (in the form of three-dimensional busts) represent a Platonic conception of the web: although we don't see it, we accept its existence. Thus, in the course of our days and our routines, there are margins between worlds that are constantly redrawn and updated. The boundary between our personal experience and the global world is a field of freedom, but also a battlefield where the fundamental themes of societies mix with our personal fears and desires.
+This exhibition is situated on the boundary between the physical and the virtual, between the rational and the sensorial, between the human and the non-human. It is an experience that places us in this strange but at the same time familiar space: the margin.</div>
+	<br />
+	<button class="ok" onclick="this.parentElement.style.visibility = 'hidden';">Close</button>
+  </div>
+
+<!-- Top navigation -->
+<div class="topnav">
+
+  <!-- Centered link -->
+  <div class="topnav-centered" onclick="document.getElementById('sobreMsg').style.visibility = 'visible'">
+    <a>About</a>
+  </div>
+
+  <!-- Left-aligned links (default) -->
+  <a href="https://carlostrancoso.github.io/Persona/">Previous</a>
+
+  <!-- Right-aligned links -->
+  <div class="topnav-right">
+    <a href="https://carlostrancoso.github.io/Nuvem/">Next</a>
+  </div>
+
+</div>
+
+  <canvas id="c"></canvas>
+  <div class="loading-screen">
+    <label for="loading-screen">Loading...</label>
+  </div>
+</body>
+
+</html>
