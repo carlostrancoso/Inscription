@@ -83,7 +83,7 @@ manager.onError = function ( url ) {
   //luz vermelha
   {
     var color = 0xFF0000;
-    var intensity = 3;
+    var intensity = 4;
     var lightR = new THREE.DirectionalLight(color, intensity);
     lightR.position.set(5, 10, 10);
     scene.add(lightR);
@@ -163,7 +163,7 @@ objLoader.load('LUPA.obj', function (obj) {
     }
   });
 
-  busto83.visible = true;
+  busto83.visible = false;
   scene.add(busto83);
 });
 
@@ -307,7 +307,7 @@ loader.load('./BUSTO_96.glb', function (glb) {
     }
   });
 
-  busto96.visible = false;
+  busto96.visible = true;
   scene.add(busto96);
 });
 
@@ -393,7 +393,7 @@ loader.load('./BUSTO_102.glb', function (glb) {
 
 var busto107;
 
-loader.load('./BUSTO_102.glb', function (glb) {
+loader.load('./BUSTO_107.glb', function (glb) {
   busto107 = glb.scene;
 
   // Traverse through all the meshes in the model and set their material's side property
@@ -407,16 +407,18 @@ loader.load('./BUSTO_102.glb', function (glb) {
   scene.add(busto107);
 });
 
+
+
   //Rotatividade dos modelos
 
-  var state = 0;
+  var state = Math.floor(Math.random() * 16);
 
   var rotatividade = function (event) {
-    state++;
+    state = Math.floor(Math.random() * 16);
 
     if (state == 1) {
 
-    //gustavo
+   
     busto83.visible = false;
     busto84.visible = true;
     busto85.visible = false;
@@ -435,7 +437,7 @@ loader.load('./BUSTO_102.glb', function (glb) {
     busto107.visible = false;
 
   } else if (state == 2) {
-    //gemeas
+    
     busto83.visible = false;
     busto84.visible = false;
     busto85.visible = true;
@@ -454,7 +456,7 @@ loader.load('./BUSTO_102.glb', function (glb) {
     busto107.visible = false;
 
   } else if (state == 3) {
-    //matias
+    
     busto83.visible = false;
     busto84.visible = false;
     busto85.visible = false;
@@ -473,7 +475,7 @@ loader.load('./BUSTO_102.glb', function (glb) {
     busto107.visible = false;
 
   } else if (state == 4) {
-    //madrinha
+    
     busto83.visible = false;
     busto84.visible = false;
     busto85.visible = false;
@@ -492,7 +494,7 @@ loader.load('./BUSTO_102.glb', function (glb) {
     busto107.visible = false;
 
   } else if (state == 5) {
-    //madrinha
+    
     busto83.visible = false;
     busto84.visible = false;
     busto85.visible = false;
@@ -511,7 +513,7 @@ loader.load('./BUSTO_102.glb', function (glb) {
     busto107.visible = false;
 
   } else if (state == 6) {
-    //madrinha
+   
     busto83.visible = false;
     busto84.visible = false;
     busto85.visible = false;
@@ -530,7 +532,7 @@ loader.load('./BUSTO_102.glb', function (glb) {
     busto107.visible = false;
 
   } else if (state == 7) {
-    //madrinha
+    
     busto83.visible = false;
     busto84.visible = false;
     busto85.visible = false;
@@ -549,7 +551,7 @@ loader.load('./BUSTO_102.glb', function (glb) {
     busto107.visible = false;
 
   } else if (state == 8) {
-    //madrinha
+    
     busto83.visible = false;
     busto84.visible = false;
     busto85.visible = false;
@@ -568,7 +570,7 @@ loader.load('./BUSTO_102.glb', function (glb) {
     busto107.visible = false;
 
   } else if (state == 9) {
-    //madrinha
+    
     busto83.visible = false;
     busto84.visible = false;
     busto85.visible = false;
@@ -587,7 +589,7 @@ loader.load('./BUSTO_102.glb', function (glb) {
     busto107.visible = false;
 
   } else if (state == 10) {
-    //madrinha
+   
     busto83.visible = false;
     busto84.visible = false;
     busto85.visible = false;
@@ -606,7 +608,7 @@ loader.load('./BUSTO_102.glb', function (glb) {
     busto107.visible = false;
 
   } else if (state == 11) {
-    //madrinha
+   
     busto83.visible = false;
     busto84.visible = false;
     busto85.visible = false;
@@ -625,7 +627,7 @@ loader.load('./BUSTO_102.glb', function (glb) {
     busto107.visible = false;
 
   } else if (state == 12) {
-    //madrinha
+    
     busto83.visible = false;
     busto84.visible = false;
     busto85.visible = false;
@@ -644,7 +646,7 @@ loader.load('./BUSTO_102.glb', function (glb) {
     busto107.visible = false;
 
   } else if (state == 13) {
-    //madrinha
+    
     busto83.visible = false;
     busto84.visible = false;
     busto85.visible = false;
@@ -663,7 +665,7 @@ loader.load('./BUSTO_102.glb', function (glb) {
     busto107.visible = false;
     
   } else if (state == 14) {
-    //madrinha
+   
     busto83.visible = false;
     busto84.visible = false;
     busto85.visible = false;
@@ -682,7 +684,7 @@ loader.load('./BUSTO_102.glb', function (glb) {
     busto107.visible = false;
 
   } else if (state == 15) {
-    //madrinha
+
     busto83.visible = false;
     busto84.visible = false;
     busto85.visible = false;
@@ -700,9 +702,9 @@ loader.load('./BUSTO_102.glb', function (glb) {
     busto102.visible = false;
     busto107.visible = true;
 
-  } else if (state >= 15) {
+  } else if (state >= 16) {
     state = 0;
-    //lucas
+   
     busto83.visible = true;
     busto84.visible = false;
     busto85.visible = false;
@@ -722,8 +724,10 @@ loader.load('./BUSTO_102.glb', function (glb) {
   }
 };
 
-// formas de interacao
 
+
+// formas de interacao
+/* 
 document.querySelector('#c').addEventListener('dblclick', rotatividade, false);
 document.querySelector('#c').addEventListener("touchstart", tapHandler);
 
@@ -738,6 +742,27 @@ function tapHandler(event) {
     event.preventDefault();
     rotatividade();
  }
+ */
+
+
+ const previousButton = document.getElementById('previousButton');
+  const nextButton = document.getElementById('nextButton');
+  const okButton = document.getElementById('okButton');
+
+  previousButton.addEventListener('click', () => {
+    // Handle previous button click event
+    rotatividade()
+  });
+
+  nextButton.addEventListener('click', () => {
+    // Handle next button click event
+    rotatividade()
+  });
+
+  okButton.addEventListener('click', () => {
+    // Handle close button click event
+    rotatividade()
+  });
 
 //redimensionamento da janela
 
@@ -783,7 +808,6 @@ if(lupa) lupa.rotation.y += Math.random()*0.1;
 
 }
 
-
    if(busto83) busto83.rotation.y -= 0.002;    
    if(busto84) busto84.rotation.y -= 0.002;   
    if(busto85) busto85.rotation.y += 0.002;   
@@ -801,6 +825,7 @@ if(lupa) lupa.rotation.y += Math.random()*0.1;
    if(busto102) busto102.rotation.y -= 0.002;
    if(busto107) busto107.rotation.y += 0.002;
 
+ 
     renderer.render(scene, camera);
 
     if (resizeRendererToDisplaySize(renderer)) {
@@ -811,7 +836,7 @@ if(lupa) lupa.rotation.y += Math.random()*0.1;
     controls.update();
 
     
-    console.log(elapsedTime);
+    console.log(state);
 
     requestAnimationFrame(animate);
     
@@ -826,42 +851,64 @@ animate();
 </head>
 
 <body>
+<!-- Botões prev e next -->
+<div class="button-prev">
+  <button id="previousButton">
+    <img src="prev.svg" alt="Previous">
+  </button>
+</div>
+
+<div class="button-next">
+  <button id="nextButton">
+    <img src="next.svg" alt="Next">
+  </button>
+</div>
 
   <!-- Info inicial -->
   <div class="info">
-    <div class="message"><h3>Inscription</h3><br>Interact by tapping, dragging and zooming.<br><br>Double tap or double click to change.<br><br>Use the buttons 'Previous' and 'Next' to switch between experiences,<br>and the 'About' button to find out more information.<br><br></div>
+    <div class="message"><h3>Inscription</h3><br><br><img src="orbit.svg"/>&nbsp&nbsp&nbsp<img src="zoom.svg"/><br>Interaja arrastando e ampliando.<br><br><img src="language.svg"/><br>Click on EN / PT button to change language.<br><br></div>
     <br />
-    <button class="ok" onclick="this.parentElement.style.display='none';">OK</button>
+    <button class="ok" id="okButton" onclick="this.parentElement.style.display='none';">OK</button>
 </div>
 
 <div class="sobre" id="sobreMsg">
-	<div class="message"><h3>Persona</h3><a href="https://carlostrancoso.com/"><h2>Carlos Trancoso</h2></a>‘Persona’ is part of the experimental project <a href="https://carlostrancoso.com/rise-of-trivial/">‘Rise of trivial’</a>. The term ‘Persona’ is used in digital marketing to describe a fictional character who represents an ideal customer. It is also, in the conception of classical philosophy, an archetype, that is, an idea as an original model of something existing. These portraits (in the form of three-dimensional busts) represent a Platonic conception of the web: although we don't see it, we accept its existence. Thus, in the course of our days and our routines, there are margins between worlds that are constantly redrawn and updated. The boundary between our personal experience and the global world is a field of freedom, but also a battlefield where the fundamental themes of societies mix with our personal fears and desires.
-This exhibition is situated on the boundary between the physical and the virtual, between the rational and the sensorial, between the human and the non-human. It is an experience that places us in this strange but at the same time familiar space: the margin.</div>
-	<br />
-	<button class="ok" onclick="this.parentElement.style.visibility = 'hidden';">Close</button>
+  <div class="message">
+    <h3>Inscrição</h3>
+    <a href="https://carlostrancoso.com/"><h2>Carlos Trancoso</h2></a>
+
+    <i>Inscription</i> é o resultado de uma residência artística realizada no <a href="https://goo.gl/maps/h83XrYbAej5rGabY7">Fórum Maia</a> durante a <a href="https://bienaldamaia23.pt/">Bienal da Maia 2023</a>.<br>Ao longo de um período de duas semanas, pessoas envolvidas ativamente na concepção e produção da Bienal de Arte Contemporânea foram fotografadas e transformadas em modelos 3D, sendo expostas como esculturas em papel. Durante os cinco meses da Bienal, estas pessoas tornam-se residentes permanentes ou ocasionais do Fórum Maia, participando numa performance espontânea com a exposição. Os visitantes têm a oportunidade de testemunhar e interagir com estas pessoas, ampliando a percepção das esculturas e estabelecendo conexões entre pessoas reais (por meio da percepção geral), representações de avatares (por meio deste site) e as versões objetificadas (por meio das esculturas). Ao participar neste projeto, os indivíduos assumem uma <i>Inscrição</i> como expressão metafórica do consentimento diário exigido pela web, ingressando num <i>clube</i> associado ao espaço e tempo da Bienal.<br>Clique no link para ver outras experiências que fazem parte do projeto <a href="https://carlostrancoso.com/rise-of-trivial/"><i>Rise of trivial</i></a>.<br>
+    <br/>
+    <button class="close" onclick="document.getElementById('sobreMsg').style.visibility = 'hidden'">Fechar</button>    
   </div>
+</div>
+
+
+
+
 
 <!-- Top navigation -->
 <div class="topnav">
 
   <!-- Centered link -->
-  <div class="topnav-centered" onclick="document.getElementById('sobreMsg').style.visibility = 'visible'">
+ <!--  <div class="topnav-centered" onclick="document.getElementById('sobreMsg').style.visibility = 'visible'">
     <a>About</a>
-  </div>
+  </div> -->
 
   <!-- Left-aligned links (default) -->
-  <a href="https://carlostrancoso.github.io/Persona/">Previous</a>
+  <div class="topnav-left" onclick="document.getElementById('sobreMsg').style.visibility = 'visible'">
+    <a>Sobre</a>
+  </div>
 
   <!-- Right-aligned links -->
   <div class="topnav-right">
-    <a href="https://carlostrancoso.github.io/Nuvem/">Next</a>
+    <a href="https://carlostrancoso.github.io/InscriptionEN/">EN / PT <img src="language.svg"/> </a>
   </div>
 
 </div>
 
   <canvas id="c"></canvas>
   <div class="loading-screen">
-    <label for="loading-screen">Loading...</label>
+    <label for="loading-screen">A carregar...</label>
   </div>
 </body>
 
